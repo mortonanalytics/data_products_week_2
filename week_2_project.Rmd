@@ -1,0 +1,27 @@
+---
+title: "Leaflet Project"
+author: "Ryan Morton"
+date: "April 21, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(leaflet)
+library(htmltools)
+
+data(quakes)
+```
+
+## Leaflet
+
+```{r map, message=FALSE, warning=FALSE}
+quakes %>%
+  leaflet() %>%
+  addTiles() %>%
+  addMarkers(lng = ~long, 
+             lat = ~lat, 
+             clusterOptions = markerClusterOptions(), 
+             label = ~paste("Magnitude: ",as.character(mag)))
+
+```
